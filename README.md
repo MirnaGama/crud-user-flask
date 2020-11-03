@@ -7,7 +7,7 @@ RESTFul API in Flask with User CRUD using Flask-SQLAlchemy
 
 ### Creating database:
 ```bash
-.../api-jwt> python
+.../crud-user-flask> python
 >>> from api import db
 >>> db.create_all()
 >>> exit()
@@ -15,7 +15,7 @@ RESTFul API in Flask with User CRUD using Flask-SQLAlchemy
 
 ### Checking the tables:
 ```bash
-.../api-jwt> sqlite3 api.db
+.../crud-user-flask> sqlite3 api.db
 sqlite> .tables
 ```
 

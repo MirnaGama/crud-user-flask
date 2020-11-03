@@ -64,7 +64,7 @@ def get_all_users():
 @app.route('/user/<public_id>', methods=['GET'])
 def get_user_by_id(public_id):
     
-    user = User.query.filter_by(public_id=public_id).first() # get the first with similar public id
+    user = User.query.filter_by(public_id=public_id).first() # find by public id
 
     if not user:
         return jsonify({'message': 'User not found!'}) 
@@ -78,7 +78,18 @@ def get_user_by_id(public_id):
 
     return jsonify({'user' : user_data})
 
+# DELETE USER BY ID
+@app.route('/user/<public_id>', methods=['DELETE'])
+def delete_user(public_id):
+    user = User.query.filter_by(public_id=public_id).first() # find by public id
 
+    if not user:
+        return jsonify({'message': 'User not found!'})
+
+    db.session.delete(user) # delete the user
+    db.session.commit()
+
+    return jsonify({'message' : 'The user has been successfully deleted!'})
 
 
 if __name__ == '__main__':
