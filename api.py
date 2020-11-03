@@ -42,5 +42,44 @@ def insert_into_user():
     # return a message
     return jsonify({'message': 'New user has been successfully created!'})
 
+
+# SELECT ALL USERS
+@app.route('/users', methods=['GET'])
+def get_all_users():
+    outputUsers = [] # return var
+    usersResponse = User.query.all() # select all users (query)
+
+    # this will be needed so their real id won't be displayed
+    for user in usersResponse:
+        user_data = {} # creating a dic
+        user_data['public_id'] = user.public_id
+        user_data['name'] = user.name
+        user_data['password'] = user.password
+        user_data['admin'] = user.admin
+        outputUsers.append(user_data)
+
+    return jsonify({'users': outputUsers}) # returning the users -- json format
+
+# SELECT USER BY ID 
+@app.route('/user/<public_id>', methods=['GET'])
+def get_user_by_id(public_id):
+    
+    user = User.query.filter_by(public_id=public_id).first() # get the first with similar public id
+
+    if not user:
+        return jsonify({'message': 'User not found!'}) 
+    
+    # again, the real id shouldn't be displayed 
+    user_data = {}
+    user_data['public_id'] = user.public_id
+    user_data['name'] = user.name
+    user_data['password'] = user.password
+    user_data['admin'] = user.admin
+
+    return jsonify({'user' : user_data})
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
