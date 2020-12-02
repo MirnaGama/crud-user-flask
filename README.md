@@ -1,10 +1,6 @@
 # About the project:
 RESTFul API in Flask with User CRUD using Flask-SQLAlchemy
 
-### You should install:
-* Flask
-* Flask SQL Alchemy
-
 ### Creating database:
 ```bash
 .../crud-user-flask> python
